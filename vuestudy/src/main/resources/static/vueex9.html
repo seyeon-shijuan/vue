@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Vue Event Emit Sample: 하위 컴포넌트의 값을 상위 컴포넌트로 전달</title>
+</head>
+<body>
+	<div id="app">
+		<child-component v-on:show-log="printText"></child-component>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script type="text/javascript">
+		Vue.component('child-component',{
+			template:'<button v-on:click="showLog">show</button>',
+			methods:{
+				showLog:function(){
+					this.$emit('show-log');
+				}
+			}
+		});
+		
+		new Vue({
+			el:'#app',
+			data:{
+				message: 'Hello vue! passed from parent component'
+			},
+			methods:{
+				printText:function(){
+					console.log("received an event");
+				}
+			}
+		});
+	</script>
+	
+</body>
+</html>

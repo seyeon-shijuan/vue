@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Vue 지역 전역 컴포넌트 생성하기</title>
+</head>
+<body>
+	<div id="app">
+		<header><h3>{{message}}</h3></header>
+		<!-- 전역 컴포넌트 todo-footer 태그 추가 -->
+		<todo-footer></todo-footer> <!-- 전역 -->
+		<!-- 지역 컴포넌트 todo-list 태그 추가 -->
+		<todo-list></todo-list> <!-- 지역 -->
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script type="text/javascript">
+		//지역 컴포넌트 등록
+		var cmp = {
+				template : "<div>지역</div>"
+		};
+		Vue.component('todo-footer',{
+			template:"<div>전역</div>"
+		});
+		new Vue({
+			el:"#app",
+			data:{
+				message:"vue의 지역전역컴포넌트 예제"
+			},
+			components: {
+				'todo-list':cmp
+			}
+		});
+	</script>
+	
+</body>
+</html>

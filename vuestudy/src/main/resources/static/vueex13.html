@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>스타일 바인딩하기</title>
+</head>
+<body>
+	<div id="app">
+		<button v-on:click="isActive=!isActive">isActive</button>
+		<p v-bind:class="{child:isChild, 'is-active':isActive}" class="item">동적클래스</p>
+		<p v-bind:style="{color:textColor, backgroundColor: bgColor}" class="item">동적스타일</p>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script>
+		new Vue({
+			el:"#app",
+			data: {
+				isChild : true,
+				isActive : true,
+				textColor : "red",
+				bgColor : "lightgray"
+			}
+		})
+	</script>
+	<style>
+		.item {
+			padding: 4px 8px;
+			transition: background-color 0.4s;
+		}
+		.is-active {
+			background: #ffeaea;
+		}
+	</style>
+</body>
+</html>
