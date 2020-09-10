@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vueex19</title>
+</head>
+<body>
+	<!-- v-on: 이벤트 발생
+	click.right: 오른쪽 마우스가 클릭되면
+	handler: 기본적으로 설정된 핸들러 실행 
+	prevent: 기본적으로 설정된 핸들러가 실행되지 않도록 설정-->
+	
+	<div id="app">
+		<input type="file" v-on:change="handleChange"><!-- 파일의 내용이 변경되면 handleChange이벤트가 발생-->
+		<div v-if="preview"><img v-bind:src="preview"></div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data : {
+				preview:''
+			},
+			methods: {
+				handleChange: function(event){
+					var file = event.target.files[0] //이벤트 소스
+					if(file && file.type.match(/^image\/(png|jpeg)$/)){ //선택된 파일의 이미지파일
+						this.preview = window.URL.createObjectURL(file) //클라이언트의 이미지파일의 URL을 저장
+					}
+				}
+			}
+		})
+	</script>
+	<style>
+		.strong {
+			background-color: orange;
+			color: white;
+		}
+	</style>
+</body>
+</html>

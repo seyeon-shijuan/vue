@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vueex17</title>
+</head>
+<body>
+	<!-- v-on: 이벤트 발생
+	click.right: 오른쪽 마우스가 클릭되면
+	handler: 기본적으로 설정된 핸들러 실행 
+	prevent: 기본적으로 설정된 핸들러가 실행되지 않도록 설정-->
+	
+	<div id="app">
+		<div v-on:click.right="handler">example1</div>
+		<div v-on:click.right.prevent="handler" class="strong">여기에서는 오른쪽마우스가 작동이 안돼요.</div><!-- 마우스 오른쪽 버튼을 눌렀을 때 컨텍스트 메뉴가 출력되지 않음 -->
+		<hr>
+		<label><input type="checkbox" v-model="val1">{{val1}}</label>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data : {
+				val1 : true
+			}
+		})
+	</script>
+	<style>
+		.strong {
+			background-color: orange;
+			color: white;
+		}
+	</style>
+</body>
+</html>

@@ -7,13 +7,15 @@
 <body>
 	<div id="app">
 		<ol>
-			<li v-for="item in list">{{ item }}</li>
+			<li v-for="item in list2">{{ item }}</li>
 		</ol>
 		<hr>
 		<ul>
-			<li v-for="(item,index) in list2" v-bind:key="item.id" v-bind:class="{strong : item.hp > 300}">
+			<li v-for="(item,index) in list" v-bind:key="item.id" v-bind:class="{strong : item.hp > 300}">
 			ID.{{ item.id }} {{ item.name }} HP.{{ item.hp }}
 			<span v-if="item.hp >300">강하다!</span>
+			<span v-if="item.hp >50">빈사상태</span>
+			<button v-on:click="doAttack(index)">공격하기</button>
 			<button v-on:click="doRemove(index)">몬스터 제거하기</button>
 			</li>
 		</ul>
@@ -28,8 +30,8 @@
 			el : "#app",
 			data : {
 				name : "강아지",
-				list:["사과","바나나","딸기"],
-				list2: [
+				list2:["사과","바나나","딸기"],
+				list: [
 					{ id: 1, name: '슬라임', hp:100 },
 					{ id: 2, name: '고블린', hp:200 },
 					{ id: 3, name: '드래곤', hp:500 }
@@ -39,22 +41,25 @@
 				doAdd:function(){
 					//reduce : 배열 요소마다 함수를 호출()
 					//max : 최대 id값
-					var max = this.list2.reduce(function(a,b){
+					var max = this.list.reduce(function(a,b){ //reduce : 배열의 요소들을 하나씩 호출하는 함수 설정. a:index, b:요소
 						return a>b.id ? a : b.id
 					},0)
 					
-					this.list2.push({
+					this.list.push({
 						id : max+1,
 						name : this.name,
 						hp : 500
 					})
 				},
 				doRemove : function(index){
-					this.list2.splice(index,1)
+					this.list.splice(index,1)
+				},
+				doAttack : function(index){
+					this.list[index].hp -= 100
 				}
 			}
 		})
-		app.list.push("오렌지")
+		app.list2.push("오렌지")
 	</script>
 	<style>
 		.strong {color: red;}

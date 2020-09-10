@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vueex16</title>
+</head>
+<body>
+	<div id="app">
+		<button v-on:click="handleClick">Count up</button>
+		<button v-on:click="show=!show">표시/숨김</button>
+		<span ref="count" v-if="show">0</span>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data : {
+				message : '',
+				show : true
+			},
+			mounted:function(){ //요소 연결 이후
+				console.log(this.$el); //$el : 현재 연결된 요소
+				console.log(this.$refs.count); //ref 속성의 값이 count인 값
+			},
+			methods: {
+				handleClick: function(){
+					var count = this.$refs.count //span태그의 0이 count의 값이다.
+					if(count){
+						count.innerText = parseInt(count.innerText, 10)+1
+					}
+				}
+			}
+		})
+	</script>
+</body>
+</html>
